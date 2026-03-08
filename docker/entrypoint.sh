@@ -4,7 +4,7 @@ set -euo pipefail
 # --------- НАСТРОЙКИ ПО УМОЛЧАНИЮ --------------------------------------------
 # Можно переопределить через переменные окружения в docker-compose:
 #   DATABASE_URL, APP_MODULE, APP_HOST, APP_PORT, UVICORN_WORKERS, UVICORN_RELOAD
-: "${DATABASE_URL:=postgresql+asyncpg://postgres:postgres@db:5432/to_do_list}"
+: "${DATABASE_URL:=postgresql+asyncpg://postgres:postgres@db:5432/adki}"
 : "${APP_MODULE:=src.main:app}"
 : "${APP_HOST:=0.0.0.0}"
 : "${APP_PORT:=8000}"

@@ -3,6 +3,7 @@ import hashlib
 import hmac
 import os
 from datetime import UTC, datetime, timedelta
+from uuid import UUID
 
 import jwt
 
@@ -29,10 +30,11 @@ def verify_password(password: str, stored_hash: str) -> bool:
     return hmac.compare_digest(password_hash, expected_hash)
 
 
-def _create_token(username: str, token_type: str, expires_in_seconds: int) -> str:
+def _create_token(user_id: UUID, username: str, token_type: str, expires_in_seconds: int) -> str:
     now = datetime.now(UTC)
     payload = {
-        'sub': username,
+        'sub': str(user_id),
+        'username': username,
         'type': token_type,
         'iat': now,
         'exp': now + timedelta(seconds=expires_in_seconds),
@@ -40,16 +42,16 @@ def _create_token(username: str, token_type: str, expires_in_seconds: int) -> st
     return jwt.encode(payload, settings.jwt_secret_key.get_secret_value(), algorithm=settings.jwt_algorithm)
 
 
-def create_access_token(username: str) -> str:
-    return _create_token(username, 'access', settings.jwt_access_expires)
+def create_access_token(user_id: UUID, username: str) -> str:
+    return _create_token(user_id, username, 'access', settings.jwt_access_expires)
 
 
-def create_refresh_token(username: str) -> str:
-    return _create_token(username, 'refresh', settings.jwt_refresh_expires)
+def create_refresh_token(user_id: UUID, username: str) -> str:
+    return _create_token(user_id, username, 'refresh', settings.jwt_refresh_expires)
 
 
-def decode_token(token: str, expected_type: str) -> str | None:
-    """Decode token and validate token type. Returns username if valid."""
+def decode_token(token: str, expected_type: str) -> UUID | None:
+    """Decode token and validate token type. Returns user UUID if valid."""
     try:
         payload = jwt.decode(
             token,
@@ -66,4 +68,7 @@ def decode_token(token: str, expected_type: str) -> str | None:
     if not isinstance(subject, str):
         return None
 
-    return subject
+    try:
+        return UUID(subject)
+    except ValueError:
+        return None
