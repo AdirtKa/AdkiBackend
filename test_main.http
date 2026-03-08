@@ -9,3 +9,16 @@ GET http://127.0.0.1:8000/hello/User
 Accept: application/json
 
 ###
+
+POST http://127.0.0.1:8000/register
+Content-Type: application/json
+
+{
+  "username": "Adirtka",
+  "password": "123456"
+}
+
+###
+
+GET http://127.0.0.1:8000/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3Y2VjODBmMy05ODhjLTRjM2QtOTdiOC0zNTc1YTY4MGJjYWEiLCJ1c2VybmFtZSI6IkFkaXJ0a2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzcyOTc3MzU3LCJleHAiOjE3NzI5ODA5NTd9.lzCRD4RC8toj6-LsznCjj7FazAd40QZ20SnAYQAnq7Q
