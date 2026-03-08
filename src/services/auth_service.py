@@ -25,7 +25,7 @@ async def register_user(db: AsyncSession, username: str, password: str) -> Token
 
 async def login_user(db: AsyncSession, username: str, password: str) -> TokenPair:
     user = await get_user_by_username(db, username)
-    if user is None or not verify_password(password, user.password):
+    if user is None or not verify_password(password, user.password_hash):
         raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid username or password')
 
     return build_token_pair(user)

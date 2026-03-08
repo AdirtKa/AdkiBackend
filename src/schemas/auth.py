@@ -17,7 +17,7 @@ class RegisterRequest(BaseModel):
 
     @classmethod
     @field_validator("password")
-    def validate_username(cls, value: str) -> str:
+    def validate_password(cls, value: str) -> str:
         value = value.strip()
         if " " in value:
             raise ValueError("Password must not contain spaces")
@@ -38,7 +38,7 @@ class LoginRequest(BaseModel):
 
     @classmethod
     @field_validator("password")
-    def validate_username(cls, value: str) -> str:
+    def validate_password(cls, value: str) -> str:
         value = value.strip()
         if " " in value:
             raise ValueError("Password must not contain spaces")
