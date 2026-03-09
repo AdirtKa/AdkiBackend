@@ -19,7 +19,7 @@ async def get_user_by_id(db: AsyncSession, user_id: UUID) -> User | None:
 
 
 async def create_user(db: AsyncSession, username: str, password_hash: str) -> User:
-    user = User(username=username, password=password_hash)
+    user = User(username=username, password_hash=password_hash)
     db.add(user)
     await db.commit()
     await db.refresh(user)
