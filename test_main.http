@@ -1,6 +1,6 @@
 # Test your FastAPI endpoints
 
-GET http://127.0.0.1:8000/
+GET http://127.0.0.1:8047/
 Accept: application/json
 
 ###
@@ -10,7 +10,7 @@ Accept: application/json
 
 ###
 
-POST http://127.0.0.1:8000/register
+POST http://127.0.0.1:8047/auth/register
 Content-Type: application/json
 
 {
@@ -20,5 +20,20 @@ Content-Type: application/json
 
 ###
 
-GET http://127.0.0.1:8000/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI3Y2VjODBmMy05ODhjLTRjM2QtOTdiOC0zNTc1YTY4MGJjYWEiLCJ1c2VybmFtZSI6IkFkaXJ0a2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzcyOTc3MzU3LCJleHAiOjE3NzI5ODA5NTd9.lzCRD4RC8toj6-LsznCjj7FazAd40QZ20SnAYQAnq7Q
+POST http://127.0.0.1:8047/auth/register
+Content-Type: application/json
+
+{
+  "username": "AdirtKa",
+  "password": "123456"
+}
+
+###
+
+GET http://127.0.0.1:8047/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODVhMWU1YS1jMzRiLTQ1MzMtODkzNy05YjQ2ZDUxZWNjNTYiLCJ1c2VybmFtZSI6IkFkaXJ0S2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTEzNTg0LCJleHAiOjE3NzMxMTcxODR9.UW_qmACwtzi7WqOtXoOqbmnITf8T_TIHUAbSVRRfsbo
+
+###
+
+GET http://127.0.0.1:8047/decks/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODVhMWU1YS1jMzRiLTQ1MzMtODkzNy05YjQ2ZDUxZWNjNTYiLCJ1c2VybmFtZSI6IkFkaXJ0S2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTEzNTg0LCJleHAiOjE3NzMxMTcxODR9.UW_qmACwtzi7WqOtXoOqbmnITf8T_TIHUAbSVRRfsbo
