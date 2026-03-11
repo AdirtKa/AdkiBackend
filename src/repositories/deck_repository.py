@@ -1,6 +1,6 @@
 from uuid import UUID
 
-from sqlalchemy import select
+from sqlalchemy import select, delete, update
 from sqlalchemy.ext.asyncio import AsyncSession
 
 from src.models.deck import Deck
@@ -18,3 +18,13 @@ async def create_deck(db: AsyncSession, deck_name: str, user_id: UUID) -> Deck:
     await db.commit()
     await db.refresh(deck)
     return deck
+
+
+async def delete_deck(db: AsyncSession, deck_id: UUID) -> bool:
+    deck = await db.get(Deck, deck_id)
+    if deck is not None:
+        await db.delete(deck)
+        await db.commit()
+        return True
+
+    return False
