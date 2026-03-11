@@ -6,7 +6,7 @@ from sqlalchemy.ext.asyncio import AsyncSession
 from src.database import get_db
 from src.dependencies.auth import get_current_user
 from src.models.user import User
-from src.schemas.decks import DeckRead, DeckCreate, DeckDelete
+from src.schemas.decks import DeckRead, DeckCreate
 from src.repositories.deck_repository import create_deck, get_user_decks, delete_deck
 
 

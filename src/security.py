@@ -9,11 +9,18 @@ import jwt
 
 from src.config import settings
 
+HASH_ITERATIONS = 100_000
+JWT_SECRET = settings.jwt_secret_key.get_secret_value()
+
+
+def _derive_password_hash(password: str, salt: bytes) -> bytes:
+    return hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, HASH_ITERATIONS)
+
 
 def hash_password(password: str) -> str:
     """Generate a salted hash using pbkdf2_hmac."""
     salt = os.urandom(16)
-    password_hash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100_000)
+    password_hash = _derive_password_hash(password, salt)
     return f"{base64.b64encode(salt).decode()}:{base64.b64encode(password_hash).decode()}"
 
 
@@ -26,7 +33,7 @@ def verify_password(password: str, stored_hash: str) -> bool:
     except (ValueError, TypeError):
         return False
 
-    password_hash = hashlib.pbkdf2_hmac('sha256', password.encode('utf-8'), salt, 100_000)
+    password_hash = _derive_password_hash(password, salt)
     return hmac.compare_digest(password_hash, expected_hash)
 
 
@@ -39,7 +46,7 @@ def _create_token(user_id: UUID, username: str, token_type: str, expires_in_seco
         'iat': now,
         'exp': now + timedelta(seconds=expires_in_seconds),
     }
-    return jwt.encode(payload, settings.jwt_secret_key.get_secret_value(), algorithm=settings.jwt_algorithm)
+    return jwt.encode(payload, JWT_SECRET, algorithm=settings.jwt_algorithm)
 
 
 def create_access_token(user_id: UUID, username: str) -> str:
@@ -55,7 +62,7 @@ def decode_token(token: str, expected_type: str) -> UUID | None:
     try:
         payload = jwt.decode(
             token,
-            settings.jwt_secret_key.get_secret_value(),
+            JWT_SECRET,
             algorithms=[settings.jwt_algorithm],
         )
     except jwt.PyJWTError:

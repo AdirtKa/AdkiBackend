@@ -14,26 +14,26 @@ POST http://127.0.0.1:8047/auth/register
 Content-Type: application/json
 
 {
-  "username": "Adirtka",
-  "password": "123456"
+  "username": "1",
+  "password": "1"
 }
 
 ###
 
-POST http://127.0.0.1:8047/auth/register
+POST http://31.59.185.163:8047/auth/login
 Content-Type: application/json
 
 {
-  "username": "AdirtKa",
-  "password": "123456"
+  "username": "1",
+  "password": "1"
 }
 
 ###
 
-GET http://127.0.0.1:8047/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODVhMWU1YS1jMzRiLTQ1MzMtODkzNy05YjQ2ZDUxZWNjNTYiLCJ1c2VybmFtZSI6IkFkaXJ0S2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTEzNTg0LCJleHAiOjE3NzMxMTcxODR9.UW_qmACwtzi7WqOtXoOqbmnITf8T_TIHUAbSVRRfsbo
+GET http://31.59.185.163:8047/auth/me
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YWE4NmQ0Ni1mZDQ5LTQyMDItYTBjNC0wNTM3ZmNiYzE4ODMiLCJ1c2VybmFtZSI6IjEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTIxMTkwLCJleHAiOjE3NzMxMjQ3OTB9.bGIg55ydPOISBdT43u3IJUya_qhU0iKh6JshAcZdiPw
 
 ###
 
-GET http://127.0.0.1:8047/decks/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODVhMWU1YS1jMzRiLTQ1MzMtODkzNy05YjQ2ZDUxZWNjNTYiLCJ1c2VybmFtZSI6IkFkaXJ0S2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTEzNTg0LCJleHAiOjE3NzMxMTcxODR9.UW_qmACwtzi7WqOtXoOqbmnITf8T_TIHUAbSVRRfsbo
+GET http://31.59.185.163:8047/decks/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5YWE4NmQ0Ni1mZDQ5LTQyMDItYTBjNC0wNTM3ZmNiYzE4ODMiLCJ1c2VybmFtZSI6IjEiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTIxMTkwLCJleHAiOjE3NzMxMjQ3OTB9.bGIg55ydPOISBdT43u3IJUya_qhU0iKh6JshAcZdiPw
