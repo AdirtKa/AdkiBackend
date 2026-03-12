@@ -7,6 +7,24 @@ from src.schemas.auth import TokenPair
 from src.security import create_access_token, create_refresh_token, decode_token, hash_password, verify_password
 
 
+_INVALID_CREDENTIALS = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Invalid username or password',
+)
+_USER_NOT_FOUND = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='User not found',
+)
+_INVALID_REFRESH_TOKEN = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Invalid or expired refresh token',
+)
+_INVALID_ACCESS_TOKEN = HTTPException(
+    status_code=status.HTTP_401_UNAUTHORIZED,
+    detail='Invalid or expired access token',
+)
+
+
 def build_token_pair(user: User) -> TokenPair:
     return TokenPair(
         access_token=create_access_token(user.id, user.username),
@@ -26,7 +44,7 @@ async def register_user(db: AsyncSession, username: str, password: str) -> Token
 async def login_user(db: AsyncSession, username: str, password: str) -> TokenPair:
     user = await get_user_by_username(db, username)
     if user is None or not verify_password(password, user.password_hash):
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid username or password')
+        raise _INVALID_CREDENTIALS
 
     return build_token_pair(user)
 
@@ -34,11 +52,11 @@ async def login_user(db: AsyncSession, username: str, password: str) -> TokenPai
 async def refresh_tokens(db: AsyncSession, refresh_token: str) -> TokenPair:
     user_id = decode_token(refresh_token, expected_type='refresh')
     if user_id is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid or expired refresh token')
+        raise _INVALID_REFRESH_TOKEN
 
     user = await get_user_by_id(db, user_id)
     if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User not found')
+        raise _USER_NOT_FOUND
 
     return build_token_pair(user)
 
@@ -46,10 +64,10 @@ async def refresh_tokens(db: AsyncSession, refresh_token: str) -> TokenPair:
 async def get_user_from_access_token(db: AsyncSession, access_token: str) -> User:
     user_id = decode_token(access_token, expected_type='access')
     if user_id is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='Invalid or expired access token')
+        raise _INVALID_ACCESS_TOKEN
 
     user = await get_user_by_id(db, user_id)
     if user is None:
-        raise HTTPException(status_code=status.HTTP_401_UNAUTHORIZED, detail='User not found')
+        raise _USER_NOT_FOUND
 
     return user
