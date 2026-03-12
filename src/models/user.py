@@ -18,3 +18,9 @@ class User(Base):
     password_hash: Mapped[str] = mapped_column(String(255), nullable=False)
 
     decks = relationship("Deck", back_populates="owner", cascade="all, delete-orphan")
+
+    progress = relationship(
+        "CardProgress",
+        back_populates="user",
+        cascade="all, delete-orphan",
+    )
