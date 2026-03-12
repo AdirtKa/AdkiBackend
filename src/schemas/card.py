@@ -1,4 +1,4 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import uuid
 from datetime import datetime
@@ -14,6 +14,12 @@ class CardProgressResponse(BaseModel):
     interval_days: int
     last_answered_at: datetime | None
     last_answer_correct: bool | None
+
+
+class DeckCardStatsResponse(BaseModel):
+    not_studied: int
+    answered_correctly: int
+    answered_incorrectly: int
 
 
 class CardCreate(BaseModel):

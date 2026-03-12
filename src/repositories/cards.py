@@ -1,13 +1,14 @@
-from __future__ import annotations
+﻿from __future__ import annotations
 
 import uuid
 
-from sqlalchemy import select
+from sqlalchemy import func, select
 from sqlalchemy.ext.asyncio import AsyncSession
 from sqlalchemy.orm import selectinload
 
 from src.models.card import Card
 from src.models.card_progress import CardProgress
+from src.models.deck import Deck
 from src.models.media_file import MediaFile
 from src.schemas.card import CardCreate, CardProgressUpdate, CardUpdate
 
@@ -161,3 +162,35 @@ class CardsRepository:
         await self.session.commit()
         await self.session.refresh(progress)
         return progress
+
+    async def get_deck_card_stats(self, deck_id: uuid.UUID, user_id: uuid.UUID) -> dict[str, int] | None:
+        deck_exists_stmt = select(Deck.id).where(Deck.id == deck_id, Deck.owner_id == user_id)
+        deck_exists = await self.session.execute(deck_exists_stmt)
+        if deck_exists.scalar_one_or_none() is None:
+            return None
+
+        stmt = (
+            select(
+                func.count(Card.id).filter(CardProgress.last_answered_at.is_(None)).label("not_studied"),
+                func.count(Card.id)
+                .filter(CardProgress.last_answered_at.is_not(None), CardProgress.last_answer_correct.is_(True))
+                .label("answered_correctly"),
+                func.count(Card.id)
+                .filter(CardProgress.last_answered_at.is_not(None), CardProgress.last_answer_correct.is_(False))
+                .label("answered_incorrectly"),
+            )
+            .select_from(Card)
+            .join(
+                CardProgress,
+                (CardProgress.card_id == Card.id) & (CardProgress.user_id == user_id),
+            )
+            .where(Card.deck_id == deck_id)
+        )
+
+        result = await self.session.execute(stmt)
+        row = result.one()
+        return {
+            "not_studied": row.not_studied or 0,
+            "answered_correctly": row.answered_correctly or 0,
+            "answered_incorrectly": row.answered_incorrectly or 0,
+        }
