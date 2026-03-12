@@ -8,3 +8,6 @@ class DeckCreate(BaseModel):
 class DeckRead(BaseModel):
     id: UUID
     name: str
+
+class DeckRename(BaseModel):
+    name: str

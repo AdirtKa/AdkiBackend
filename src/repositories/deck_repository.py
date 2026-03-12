@@ -28,3 +28,16 @@ async def delete_deck(db: AsyncSession, deck_id: UUID) -> bool:
         return True
 
     return False
+
+
+async def rename_deck(db: AsyncSession, deck_id: UUID, new_name: str) -> Deck | None:
+    deck: Deck | None = await db.get(Deck, deck_id)
+    if not deck:
+        return None
+
+    deck.name = new_name
+    await db.commit()
+
+
+    await db.refresh(deck)
+    return deck
