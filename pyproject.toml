@@ -8,9 +8,12 @@ dependencies = [
     "asyncio>=4.0.0",
     "asyncpg>=0.31.0",
     "fastapi>=0.135.1",
+    "python-multipart>=0.0.20",
     "psycopg2-binary>=2.9.11",
     "pydantic-settings>=2.13.1",
     "pyjwt>=2.10.1",
     "sqlalchemy>=2.0.48",
     "uvicorn>=0.41.0",
 ]
+
+

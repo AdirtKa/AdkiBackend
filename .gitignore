@@ -239,6 +239,7 @@ celerybeat.pid
 # Environments
 .env
 .venv
+uploads/
 env/
 venv/
 ENV/
