@@ -27,6 +27,8 @@ services:
         condition: service_healthy
     ports:
       - "8047:8000"
+    volumes:
+      - ./uploads:/app/uploads
 
 volumes:
   postgres_data:
