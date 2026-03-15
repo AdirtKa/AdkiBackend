@@ -11,7 +11,7 @@ set -euo pipefail
 : "${UVICORN_WORKERS:=1}"
 : "${UVICORN_RELOAD:=false}"
 
-echo "DATABASE_URL=${DATABASE_URL}"
+echo "DATABASE_URL is set"
 echo "APP_MODULE=${APP_MODULE}"
 
 # --------- ОЖИДАНИЕ ДОСТУПНОСТИ БД -------------------------------------------
