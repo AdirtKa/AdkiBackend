@@ -38,7 +38,7 @@ class CardProgress(Base):
 
     last_answered_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
     last_answer_correct: Mapped[bool | None] = mapped_column(Boolean, nullable=True)
-    due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
+    due_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True, server_default=func.now())
 
     updated_at: Mapped[datetime] = mapped_column(
         DateTime(timezone=True),

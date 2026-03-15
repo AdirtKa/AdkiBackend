@@ -24,26 +24,30 @@ POST http://127.0.0.1:8047/auth/login
 Content-Type: application/json
 
 {
-  "username": "test",
-  "password": "test"
+  "username": "3",
+  "password": "3"
 }
 
 ###
 
 GET http://127.0.0.1:8047/auth/me
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJkODVhMWU1YS1jMzRiLTQ1MzMtODkzNy05YjQ2ZDUxZWNjNTYiLCJ1c2VybmFtZSI6IkFkaXJ0S2EiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMTEzNTg0LCJleHAiOjE3NzMxMTcxODR9.UW_qmACwtzi7WqOtXoOqbmnITf8T_TIHUAbSVRRfsbo
-
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZjdmYTAwZi1kZmYyLTRkZDAtODBlYi1jZDM1MmM0YzMwZWYiLCJ1c2VybmFtZSI6IjMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTUyODg5LCJleHAiOjE3NzM1NTY0ODl9.NJcvqzjMjnhyqg5nBHgix0WAI9yLfOvTI_eWa1kKBgM
 ###
 
 GET http://127.0.0.1:8047/decks/
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OGIzNzg4Mi1jMzUwLTQyY2QtODFhNC1lZTEyMzRkZmY5ODUiLCJ1c2VybmFtZSI6InRlc3QiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMjc2ODI3LCJleHAiOjE3NzMyODA0Mjd9.HQ2LUo198b6tj-pCk7DgoPnFq0_Bm2bJRyWpw1L34ZA
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZjdmYTAwZi1kZmYyLTRkZDAtODBlYi1jZDM1MmM0YzMwZWYiLCJ1c2VybmFtZSI6IjMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTUyODg5LCJleHAiOjE3NzM1NTY0ODl9.NJcvqzjMjnhyqg5nBHgix0WAI9yLfOvTI_eWa1kKBgM
 
 ###
 
-PUT http://127.0.0.1:8047/decks/c56ec3f0-03ce-4ffa-8065-62d65df96472
-Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiI5OGIzNzg4Mi1jMzUwLTQyY2QtODFhNC1lZTEyMzRkZmY5ODUiLCJ1c2VybmFtZSI6InRlc3QiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczMjc2ODI3LCJleHAiOjE3NzMyODA0Mjd9.HQ2LUo198b6tj-pCk7DgoPnFq0_Bm2bJRyWpw1L34ZA
+PUT http://127.0.0.1:8047/decks/
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZjdmYTAwZi1kZmYyLTRkZDAtODBlYi1jZDM1MmM0YzMwZWYiLCJ1c2VybmFtZSI6IjMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTUyODg5LCJleHAiOjE3NzM1NTY0ODl9.NJcvqzjMjnhyqg5nBHgix0WAI9yLfOvTI_eWa1kKBgM
 Content-Type: application/json
 
 {
   "name" : "aboba"
 }
+
+###
+
+GET http://127.0.0.1:8047/review/due
+Authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJlZjdmYTAwZi1kZmYyLTRkZDAtODBlYi1jZDM1MmM0YzMwZWYiLCJ1c2VybmFtZSI6IjMiLCJ0eXBlIjoiYWNjZXNzIiwiaWF0IjoxNzczNTUyODg5LCJleHAiOjE3NzM1NTY0ODl9.NJcvqzjMjnhyqg5nBHgix0WAI9yLfOvTI_eWa1kKBgM
