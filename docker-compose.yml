@@ -5,7 +5,7 @@ services:
     command: [ "postgres", "-c", "listen_addresses=*", "-c", "password_encryption=scram-sha-256" ]
     environment:
       POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
+      POSTGRES_PASSWORD: adirkta_kettle
       POSTGRES_DB: adki
     volumes:
       - postgres_data:/var/lib/postgresql/data
