@@ -9,6 +9,7 @@ from sqlalchemy.orm import selectinload
 
 from src.models.card import Card
 from src.models.card_progress import CardProgress
+from src.models.review_event import ReviewEvent
 from src.services.srs import apply_srs_answer
 
 
@@ -51,6 +52,16 @@ class ReviewRepository:
 
         progress = await self.get_or_create_progress(user_id=user_id, card_id=card_id)
         apply_srs_answer(progress, quality)
+
+        self.session.add(
+            ReviewEvent(
+                user_id=user_id,
+                card_id=card_id,
+                quality=quality,
+                was_correct=quality > 1,
+                reviewed_at=progress.last_answered_at,
+            )
+        )
 
         await self.session.commit()
         await self.session.refresh(progress)
